@@ -1,5 +1,6 @@
 # cs491
 Semester Project for CS course
+  - Raychel Delaney, Justin Lukas, Elliott Miller
 
 ---Using Sentiment Analysis to evaluate "Social Sensitivity" towards wildfires--- 
 
