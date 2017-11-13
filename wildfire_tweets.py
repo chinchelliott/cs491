@@ -30,5 +30,11 @@ twitter = Twitter(auth=oauth)
 
 tweets = []
 for x in range(10):
-        q = twitter.search.tweets(q='#wildfire', lang='en', count=100)
-        f.write(to_unicode(q))
+        q = twitter.search.tweets(q='#wildfire', lang='en', count=100, include_entities='false')
+        for result in q["statuses"]:
+            data = {}
+            data['date'] = result["created_at"]
+            data['screen_name'] = result["user"]["screen_name"]
+            data['tweet'] = result["text"]
+            json_data = json.dumps(data)
+            f.write(to_unicode(json_data))
