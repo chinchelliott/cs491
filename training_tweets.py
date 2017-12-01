@@ -62,12 +62,9 @@ class DeepTextAnalyzer(object):
 
 def load_tweets(fname):
     tweets = []
-    i = 1
     for line in open(fname):
-        print("line number", i)
         data = json.loads(line)
         tweets.append(data)
-        i = i + 1
     return tweets
 
 
@@ -146,16 +143,16 @@ def result_report(filename, results):
     i = 0
 
     for result in results:
-        if result == 'relevant':
+        if result == '1':
             # if tweet is relevant, true positives
-            if tweets_eval[i]['label'] == 'relevant':
+            if tweets_eval[i]['label'] == '1':
                 truePositives += 1
             else:
                 falsePositives += 1
             # else, false positive
         else:
             # if tweet is irrelevant, true negative
-            if tweets_eval[i]['label'] == 'irrelevant':
+            if tweets_eval[i]['label'] == '0':
                 trueNegatives += 1
             # else, false negative
             else:
@@ -166,21 +163,24 @@ def result_report(filename, results):
     recall = 0
     f1 = 0
 
-    precision = truePositives / (truePositives + falsePositives)
+  precisionDenom = truePositives + falsePositives;
+    recallDenom = truePositives + falseNegatives;
 
-    recall = truePositives / (truePositives + falseNegatives)
+    if precisionDenom == 0:
+        precisionDenom = 1;
+
+    if recallDenom == 0:
+        recallDenom = 1;
+
+
+    precision = truePositives / precisionDenom
+
+    recall = truePositives / recallDenom
 
     f1 = 2 * ((precision*recall)/(precision+recall))
 
     f.write(u"True positives: <%s>\tFalse positives: <%s>\tTrue negatives: <%s>\tFalse negatives: <%s>\n" % (truePositives, falsePositives, trueNegatives, falseNegatives))
     f.write(u"Precision: <%s>\tRecall: <%s>\tF1-score: <%s>\n" % (precision, recall, f1))
-
-    j = 0
-
-    for result in results:
-        f.write(u"<%s>\t<%s>\n" % (tweets_eval[j]['tweet'], result))
-        j += 1;
-
 
 
 if __name__ == '__main__':
@@ -188,17 +188,14 @@ if __name__ == '__main__':
     tweets = load_tweets('training_data.txt')
 
     myclf = generate_data(tweets)
-
-    # when we have data to evaluate and sort, we'll uncomment-out these lines below
-
     
-    # tweets_eval = load_tweets('filename')
+    tweets_eval = load_tweets('tagged_tweets.txt')
 
-    # T = list()
-    # T = predict_data(tweets_eval)
+    T = list()
+    T = predict_data(tweets_eval)
 
-    # results = []
+    results = []
 
-    # results = myclf.predict(T)
+    results = myclf.predict(T)
 
-    # result_report('report.txt',results)
+    result_report('report.txt',results)
