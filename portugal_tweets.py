@@ -41,7 +41,7 @@ f = io.open('port_tweets.txt', 'w', encoding='utf-8')
 # Twitter API docs:
 # https://dev.twitter.com/rest/reference/get/search/tweets
 #-----------------------------------------------------------------------
-query = twitter.search.tweets(q = "portugal", count = 100)
+query = twitter.search.tweets(q = "portugal wildfires", count = 100)
 
 #-----------------------------------------------------------------------
 # How long did this query take?
