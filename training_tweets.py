@@ -112,28 +112,6 @@ def predict_data (tweets):
     return X
 
 
-def gen_gauss(tweets):
-    model = w2v_load_model('GoogleNews-vectors-negative300.bin')
-
-    dta = DeepTextAnalyzer(model)
-
-    X = list()
-    y = list()
-
-    for tweet in tweets:
-        vector = w2v_vector(dta, tweet['tweet'])
-        X.append(vector)
-        y.append(tweet['label'])
-
-
-    clfG = GaussianNB()
-    clfG.fit(X, y)
-    GaussianNB(priors=None)
-
-    return clfG
-
-
-
 if __name__ == '__main__':
 
     tweets = load_tweets('training_data.txt')
