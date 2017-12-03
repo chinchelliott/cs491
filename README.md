@@ -33,8 +33,15 @@ Project outline:
 
 
 Description of files contained in this repo:
-  - training_data.txt : The tweets we collected and tagged in order to train our algorithm.
+
+  - wildfire_tweets.py : Code that pulls tweets containing wildfire keywords.  
+  
+  - training_data.txt : The tweets collected and tagged in order to train our algorithm.
+  
   - california_tweets.py/portual_tweets.py : Code that pulls tweets containing our target locations.
+  
   - cali_tweets.txt/port_tweets.txt : The tweets about "california" and "portugal" that were pulled.
-  - training_tweets.py : Code that uses training_data.txt to train our SVM algorithm, which is then used to determine the relevance of tweets from our cali and port txt files. 
-  -location_comparison.txt : The results from evaluating the unclassified tweets. 
+  
+  - training_tweets.py : Code that uses training_data.txt to train our SVM algorithm, which is then used to determine the relevance of tweets from our cali and port txt files.  
+  
+  - location_comparison.txt : The results from evaluating the unclassified tweets. 
