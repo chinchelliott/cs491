@@ -1,0 +1,2 @@
+Number of Relevant California Wildfire Tweets: <100>
+Number of Relevant Portugal Wildfire Tweets: <100>
